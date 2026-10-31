@@ -282,9 +282,9 @@ The training curves show a smooth decrease in both training and validation loss
 before the best checkpoint was reached, followed by modest fluctuations after the
 minimum was passed:
 
-![Training loss for experiment 2](bart-cochrane-run4/training_loss_plot.png)
+![Training loss for experiment 2](results_2/training_loss_plot.png)
 
-![Validation loss for experiment 2](bart-cochrane-run4/validation_loss_plot.png)
+![Validation loss for experiment 2](results_2/validation_loss_plot.png)
 
 The final held-out evaluation for this run used the same 1,512 test examples as
 Experiment 1 and reported the following scores from `results_2/sentence_test_metrics.json`:
