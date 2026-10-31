@@ -269,6 +269,43 @@ The test command writes its metric JSON and prediction CSV under `results/`;
 by default it overwrites the existing test artifacts. Use the `--metrics-output`
 and `--predictions` options to preserve them when running another evaluation.
 
+### Experiment 2: BART sentence simplification (run 4 / `bart-cochrane-run4`)
+
+The second sentence-level experiment was a follow-up run stored in
+`bart-cochrane-run4` and evaluated with the artifacts in `results_2/`. This
+run kept the same BART backbone (`facebook/bart-base`) and sentence-level
+Cochrane formulation, but used a different optimization setup intended to test a
+more conservative training configuration: 6 epochs, learning rate `2e-5`, batch
+size 8, weight decay `0.05`, and FP16 enabled. The best checkpoint was selected
+by the lowest validation loss, which occurred at step 2,880 (epoch 4), with a
+best validation loss of 3.27598.
+
+The training curves show a smooth decrease in both training and validation loss
+before the best checkpoint was reached, followed by modest fluctuations after the
+minimum was passed:
+
+![Training loss for experiment 2](bart-cochrane-run4/training_loss_plot.png)
+
+![Validation loss for experiment 2](bart-cochrane-run4/validation_loss_plot.png)
+
+The final held-out evaluation for this run used the same 1,512 test examples as
+Experiment 1 and reported the following scores from `results_2/sentence_test_metrics.json`:
+
+| Metric | Score | Interpretation |
+|---|---:|---|
+| SARI | 25.99 | Local single-reference SARI variant; comparable to Experiment 1. |
+| BLEU | 25.68 | Corpus-level overlap with the reference wording. |
+| BERTScore F1 | 92.25 | Semantic similarity on the 0–100 scale. |
+
+This second run is best understood as a second baseline variant rather than a
+fundamentally different modeling approach. The metrics remain close to the first
+sentence model, which suggests the training setup is stable and the observed
+differences are mainly due to hyperparameter choices and checkpoint selection
+rather than a qualitatively different simplification strategy. As with the first
+experiment, these metrics should still be interpreted together with the actual
+predictions, particularly when the model deletes detail, shortens a sentence, or
+retains technical wording that needs patient-friendly rephrasing.
+
 ## Evaluate
 
 ### Start with the copy baseline
