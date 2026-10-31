@@ -183,9 +183,15 @@ same data files, model revision, seed, arguments, library versions, and
 hardware/software setup for the closest reproducibility. GPU kernels and
 different hardware or software builds can cause small numeric differences.
 
-## Experiment 1: BART sentence simplification
+## Experiments with sentence simplification
 
-The first experiment fine-tuned `facebook/bart-base` to map complex biomedical
+This section brings together experiments that simplify individual sentences.
+Each experiment describes its approach, training setup, and evaluation so that
+the results can be considered alongside other sentence simplification methods.
+
+### Experiment 1: BART sentence simplification
+
+This experiment fine-tuned `facebook/bart-base` to map complex biomedical
 sentences to their aligned Cochrane lay-text targets. It used the sentence
 training and validation splits described above and the following settings:
 seed 42, three epochs, learning rate `5e-5`, batch size 4, weight decay
@@ -204,7 +210,7 @@ The lowest recorded validation loss was 3.1959 at epoch 3. This is the model's
 validation token-prediction loss; it is not a SARI, BLEU, BERTScore,
 readability, or human-quality score.
 
-### Held-out test evaluation
+#### Held-out test evaluation
 
 The evaluation covers 1,512 held-out sentence examples and reports:
 
