@@ -1,0 +1,2 @@
+# Optional learned text-simplification metric; requires PyTorch.
+lens-metric==0.2.0
