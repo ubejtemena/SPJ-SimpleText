@@ -269,11 +269,9 @@ The test command writes its metric JSON and prediction CSV under `results/`;
 by default it overwrites the existing test artifacts. Use the `--metrics-output`
 and `--predictions` options to preserve them when running another evaluation.
 
-### Experiment 2: BART sentence simplification (run 4 / `bart-cochrane-run4`)
+### Experiment 2: BART sentence simplification (changed training settins)
 
-The second sentence-level experiment was a follow-up run stored in
-`bart-cochrane-run4` and evaluated with the artifacts in `results_2/`. This
-run kept the same BART backbone (`facebook/bart-base`) and sentence-level
+This run kept the same BART backbone (`facebook/bart-base`) and sentence-level
 Cochrane formulation, but used a different optimization setup intended to test a
 more conservative training configuration: 6 epochs, learning rate `2e-5`, batch
 size 8, weight decay `0.05`, and FP16 enabled. The best checkpoint was selected
