@@ -1,4 +1,4 @@
-# Cochrane text simplification baselines
+# Cochrane text simplification
 
 This project implements reproducible baselines for CLEF SimpleText Task 1:
 automatically rewrite complex biomedical text into language intended for
