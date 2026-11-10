@@ -304,6 +304,47 @@ experiment, these metrics should still be interpreted together with the actual
 predictions, particularly when the model deletes detail, shortens a sentence, or
 retains technical wording that needs patient-friendly rephrasing.
 
+## Experiments with document simplification
+
+This section covers experiments that rewrite full Cochrane abstracts as
+patient-oriented lay summaries.
+
+### Experiment 1: BART model
+
+This experiment fine-tuned `facebook/bart-base` on 3,967 complex/lay abstract
+pairs and used 500 pairs for validation. The recorded settings were seed 42,
+three epochs, learning rate `5e-5`, batch size 2, weight decay `0.01`, FP16,
+and maximum source/target lengths of 1,024/256 tokens. The run configuration
+records the pretrained model revision and data hashes. The saved validation
+predictions contain all 500 validation examples.
+
+The following scores were calculated from
+`bart_document_results/document_val_predictions.csv`:
+
+| System | SARI | BLEU |
+|---|---:|---:|
+| BART predictions | 39.13 | 11.72 |
+| Copy source unchanged | 8.72 | 14.83 |
+
+SARI is this project's local single-reference implementation described above;
+BLEU is corpus BLEU from SacreBLEU 2.4.3. BART scores much higher than copying
+on SARI, which is consistent with it making simplification edits. Copying
+scores higher on BLEU, showing that BART's wording often diverges from the
+single lay-summary reference. Neither result alone says whether a rewrite
+preserves the clinical meaning or is easier to understand.
+
+The predictions are shorter on average than both the input and reference:
+385.9 words per source, 241.5 per reference, and 164.4 per prediction. Every
+prediction is non-empty and none exactly copies its source. This indicates
+substantial compression, but the predictions are about 32% shorter than the
+references on average, so some may be over-compressed. For example, for
+`CD003697`, the source reports a fibrate odds ratio of 0.58 (95% confidence
+interval 0.19 to 1.82), while the model says “an average of 1.58 (95%).” This
+changes a clinically important number and drops its interval. The example
+shows why the metric gains do not make these outputs suitable for clinical use
+without factual review.
+
+
 ## Evaluate
 
 ### Start with the copy baseline
