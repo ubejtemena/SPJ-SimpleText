@@ -1,0 +1,27 @@
+{
+  "task": "sentence",
+  "split": "test",
+  "model": "/kaggle/working/bart-cochrane-run4",
+  "data_file": "/kaggle/input/datasets/nikameskhi21/dataset/cochraneauto_sents_test.csv",
+  "data_sha256": "d69bd24a80aa9dd63d1526b08856d53aa20cb1435eb9be42a17740cd77c6fd53",
+  "example_count": 1512,
+  "metrics": {
+    "sari": 25.998693247234222,
+    "bleu": 25.67964092782369,
+    "bertscore_f1": 92.25229024887085
+  },
+  "metric_versions": {
+    "bleu": "2.4.3",
+    "bertscore": "0.3.13"
+  },
+  "sari_definition": "local implementation; lowercase whitespace tokens; sentence-level mean; one reference; 1-4 gram orders",
+  "evaluation_settings": {
+    "seed": 42,
+    "batch_size": 8,
+    "max_source_length": 512,
+    "max_target_length": 128,
+    "num_beams": 4
+  },
+  "python_version": "3.13.15",
+  "predictions_file": "/kaggle/working/results/sentence_test_predictions.csv"
+}
