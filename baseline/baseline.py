@@ -17,7 +17,8 @@ from pathlib import Path
 from typing import Any
 
 
-ROOT = Path(__file__).resolve().parent
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+ROOT = PROJECT_ROOT if (PROJECT_ROOT / "data").exists() else Path(__file__).resolve().parent
 DEFAULT_MODEL = "facebook/bart-base"
 
 
